@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:simple_bmi_calculator/constants/app_constants.dart';
 import 'package:flutter/material.dart';
-import 'package:simple_bmi_calculator/widgets/left_bar.dart';
-import 'package:simple_bmi_calculator/widgets/right_bar.dart';
+import 'package:simple_bmi_calculator/constants/app_constants.dart';
+import 'package:simple_bmi_calculator/widgets/side_bar.dart';
 
 class Home extends StatefulWidget {
   String title;
@@ -33,7 +32,7 @@ class _HomeState extends State<Home> {
         centerTitle: true,
         title: Text(
           title,
-          style: TextStyle(color: accentHexColor, fontWeight: FontWeight.w300),
+          style: TextStyle(color: accentHexColor, fontWeight: FontWeight.w300,fontSize: 28),
         ),
       ),
       body: SingleChildScrollView(
@@ -45,8 +44,7 @@ class _HomeState extends State<Home> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Container(
-                padding:
-                    EdgeInsets.only(left: 10, top: 0, right: 10, bottom: 0),
+                padding: EdgeInsets.only(left: 10, top: 0, right: 10, bottom: 0),
                 width: MediaQuery.of(context).size.width / 2,
                 child: TextField(
                   controller: _heightController,
@@ -67,8 +65,7 @@ class _HomeState extends State<Home> {
                 ),
               ),
               Container(
-                padding:
-                    EdgeInsets.only(left: 10, top: 0, right: 10, bottom: 0),
+                padding: EdgeInsets.only(left: 10, top: 0, right: 10, bottom: 0),
                 width: MediaQuery.of(context).size.width / 2,
                 child: TextField(
                   controller: _weightController,
@@ -95,10 +92,10 @@ class _HomeState extends State<Home> {
           ),
           GestureDetector(
             onTap: () {
-              if(_heightController.text.isEmpty && _weightController.text.isEmpty){
+              if (_heightController.text.isEmpty && _weightController.text.isEmpty) {
                 ScaffoldMessenger.of(context).showSnackBar(mySnackBar("Please Enter Height & Weight"));
                 return;
-              }else if (_heightController.text.isEmpty) {
+              } else if (_heightController.text.isEmpty) {
                 ScaffoldMessenger.of(context).showSnackBar(mySnackBar("Please Enter Height"));
                 return;
               } else if (_weightController.text.isEmpty) {
@@ -114,7 +111,7 @@ class _HomeState extends State<Home> {
                 } else if (_bmi >= 18.5 && _bmi <= 25) {
                   _result = "Mah man!";
                 } else {
-                  _result = "Eat Somethin Kiddo!";
+                  _result = "Eat Somethin Kid!";
                 }
               });
             },
@@ -127,9 +124,7 @@ class _HomeState extends State<Home> {
                 ),
               ),
               padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                  color: accentHexColor,
-                  borderRadius: BorderRadius.all(Radius.circular(8))),
+              decoration: BoxDecoration(color: accentHexColor, borderRadius: BorderRadius.all(Radius.circular(8))),
             ),
           ),
           SizedBox(
@@ -152,30 +147,74 @@ class _HomeState extends State<Home> {
           SizedBox(
             height: 30,
           ),
-          RightBar(barWidth: 20),
+          SideBar(
+            barHeight: 25,
+            barWidth: 20,
+            align: MainAxisAlignment.end,
+            topLeft: 25,
+            topRight: 0,
+            bottomLeft: 25,
+            bottomRight: 0,
+          ),
           SizedBox(
             height: 30,
           ),
-          RightBar(barWidth: 60),
+          SideBar(
+            barHeight: 25,
+            barWidth: 60,
+            align: MainAxisAlignment.end,
+            topLeft: 25,
+            topRight: 0,
+            bottomLeft: 25,
+            bottomRight: 0,
+          ),
           SizedBox(
             height: 30,
           ),
-          RightBar(barWidth: 40),
+          SideBar(
+            barHeight: 25,
+            barWidth: 40,
+            align: MainAxisAlignment.end,
+            topLeft: 25,
+            topRight: 0,
+            bottomLeft: 25,
+            bottomRight: 0,
+          ),
           SizedBox(
             height: 30,
           ),
-          LeftBar(barWidth: 50),
+          SideBar(
+            barHeight: 25,
+            barWidth: 50,
+            align: MainAxisAlignment.start,
+            topLeft: 0,
+            topRight: 25,
+            bottomLeft: 0,
+            bottomRight: 25,
+          ),
           SizedBox(
             height: 60,
           ),
-          LeftBar(barWidth: 30)
+          SideBar(
+            barHeight: 25,
+            barWidth: 30,
+            align: MainAxisAlignment.start,
+            topLeft: 0,
+            topRight: 25,
+            bottomLeft: 0,
+            bottomRight: 25,
+          )
         ]),
       ),
     );
   }
-  SnackBar mySnackBar(String error){
+
+  SnackBar mySnackBar(String error) {
     return SnackBar(
-      content: Text(error,style: TextStyle(color: mainHexColor),),
+      content: Text(
+        error,
+        style: TextStyle(color: mainHexColor),
+      ),
       dismissDirection: DismissDirection.up,
       behavior: SnackBarBehavior.floating,
       duration: Duration(seconds: 2),
